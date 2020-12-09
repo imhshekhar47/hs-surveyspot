@@ -1,0 +1,42 @@
+micronaut:
+  application:
+    name: surveyspot-auth-server
+  security:
+    authentication: bearer  # enable bearer token check in header
+    token:
+      jwt:
+        signatures:
+          secret:
+            generator:
+              secret: thisisasecurepasswordwhichneedstobechanged
+              jws-algorithm: HS256
+        generator:
+          access-token:
+            expiration: 60
+---
+micronaut:
+  security:
+    token:
+      jwt:
+        generator:
+          refresh-token:
+            secret: pleaseChangeThisSecretForANewOne
+---
+micronaut:
+  metrics:
+    enabled: true
+    export:
+      prometheus:
+        enabled: true
+        descriptions: true
+        step: PT1M
+
+endpoints:
+  prometheus:
+    sensitive: false
+
+grpc:
+  server:
+    port: 50051
+    keep-alive-time: 3h
+    max-inbound-message-size: 1024
