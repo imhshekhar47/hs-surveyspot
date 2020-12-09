@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.hshekhar.surveyspot.proto";
+option go_package = "proto";
+
+package proto;
+
+message User {
+    string id = 1;
+    string username = 2;
+}
