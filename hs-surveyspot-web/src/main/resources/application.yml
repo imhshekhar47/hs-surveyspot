@@ -1,0 +1,23 @@
+micronaut:
+  server.port: 8081
+  application:
+    name: hs-surveyspot-web
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+        descriptions: true
+        step: PT1M
+    enabled: true
+---
+micronaut:
+  router:
+    static-resources:
+      default:
+        enabled: true
+        mapping: "/**"
+        paths: "classpath:static"
+---
+endpoints:
+  prometheus:
+    sensitive: false
