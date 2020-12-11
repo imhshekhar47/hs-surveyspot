@@ -23,10 +23,11 @@ node {
 repositories {
     mavenLocal()
     mavenCentral()
+    jcenter()
 }
 
 application {
-    mainClass.set("${project.group  }.ApplicationKt")
+    mainClass.set("${project.group  }.Application")
 }
 
 micronaut {
@@ -53,6 +54,14 @@ dependencies {
     implementation("io.micronaut.micrometer:micronaut-micrometer-registry-prometheus")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+    // swagger
+    kapt("io.micronaut.openapi:micronaut-openapi")
+    implementation("io.swagger.core.v3:swagger-annotations")
+
+    // grpc
+    implementation("io.grpc:grpc-netty-shaded")
+    implementation("io.micronaut.grpc:micronaut-grpc-annotation")
 }
 
 tasks {
@@ -71,8 +80,8 @@ tasks {
 task<com.moowork.gradle.node.npm.NpmTask>("buildReact") {
     dependsOn("npmInstall")
 
-/*    inputs.dir("$projectDir/webapp")
-    outputs.dir("$projectDir/webapp/build/web")*/
+    inputs.dir("$projectDir/webapp")
+    //outputs.dir("$projectDir/webapp/build/web")
 
     setArgs(listOf("run", "build"))
 

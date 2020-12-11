@@ -16,5 +16,4 @@ class ApplicationTest {
     fun testItWorks() {
         Assertions.assertTrue(application.isRunning)
     }
-
 }
